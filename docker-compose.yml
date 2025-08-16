@@ -5,8 +5,8 @@ services:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://merca_online_db:3306/merca_online?serverTimezone=UTC"
-      SPRING_DATASOURCE_USERNAME: "admin"
-      SPRING_DATASOURCE_PASSWORD: "C3ntr4l.3090"
+      SPRING_DATASOURCE_USERNAME: "xxxxxx"
+      SPRING_DATASOURCE_PASSWORD: "xxxxxxxx"
     restart: always
     depends_on:
       merca_online_db:
@@ -17,7 +17,7 @@ services:
     ports:
       - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "C3ntr4l.3090"
+      MYSQL_ROOT_PASSWORD: "xxxxxxx"
       MYSQL_DATABASE: "merca_online"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
