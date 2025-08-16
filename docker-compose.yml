@@ -1,0 +1,28 @@
+services:
+  merca_online_api:
+    build: recopilador-de-ventas
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://merca_online_db:3306/merca_online?serverTimezone=UTC"
+      SPRING_DATASOURCE_USERNAME: "admin"
+      SPRING_DATASOURCE_PASSWORD: "C3ntr4l.3090"
+    restart: always
+    depends_on:
+      merca_online_db:
+        condition: service_healthy
+
+  merca_online_db:
+    image: mysql:9.3.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "C3ntr4l.3090"
+      MYSQL_DATABASE: "merca_online"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    healthcheck:
+      test: ["CMD","mysqladmin","ping","localhost"]
+      timeout: 10s
+      retries: 10
